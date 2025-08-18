@@ -1,0 +1,4 @@
+object DataModuleTelaLogin: TDataModuleTelaLogin
+  Height = 480
+  Width = 640
+end

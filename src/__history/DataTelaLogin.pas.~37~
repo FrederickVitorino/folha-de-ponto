@@ -1,0 +1,77 @@
+﻿unit DataTelaLogin;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, DataConexao, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Forms;
+
+type
+  TDataModuleTelaLogin = class(TDataModule)
+    fdqryUser: TFDQuery;
+  private
+    { Private declarations }
+  public
+    function ValidaLogin(Login, Senha: string): Integer;
+    procedure FazerLogin(Login: string; Senha: string);
+  end;
+
+var
+  DataModuleTelaLogin: TDataModuleTelaLogin;
+
+implementation
+
+uses
+  Vcl.Dialogs, FormPrincipalBase, FormTelaLogin;
+
+{$R *.dfm}
+
+{ TDataModuleTelaLogin }
+
+procedure TDataModuleTelaLogin.FazerLogin(Login, Senha: string);
+var
+  userId: Integer;
+begin
+  userId := ValidaLogin(Login, Senha);
+
+  if userId = -1 then
+  begin
+    ShowMessage('Senha ou login incorreto!!');
+    exit;
+  end;
+
+  if not Assigned(PrincipalBase) then
+    TPrincipalBase.Create(nil);
+
+  PrincipalBase.UserId := userId;
+  TelaLogin.Hide;
+  PrincipalBase.Show;
+end;
+
+function TDataModuleTelaLogin.ValidaLogin(Login, Senha: string): Integer;
+var
+  auxLogin, auxSenha: string;
+  user_id: Integer;
+begin
+  Result := -1;
+  fdqryUser.Close;
+  fdqryUser.Open;
+  while not fdqryUser.Eof do
+  begin
+    auxLogin := fdqryUser.FieldByName('login').AsString;
+    auxSenha := fdqryUser.FieldByName('senha').AsString;
+
+    if (auxLogin = Login) and (auxSenha = Senha) then
+    begin
+      user_id := fdqryUser.FieldByName('user_id').AsInteger;
+      Result := user_id;
+      Break;
+    end
+    else
+      fdqryUser.Next;
+  end;
+end;
+
+end.

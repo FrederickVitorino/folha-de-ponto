@@ -1,0 +1,12 @@
+object DataModuleTelaLogin: TDataModuleTelaLogin
+  Height = 248
+  Width = 322
+  PixelsPerInch = 120
+  object fdqryUser: TFDQuery
+    Connection = DataModuleConexao.con
+    SQL.Strings = (
+      'SELECT user_id, login, senha FROM Usuario;')
+    Left = 200
+    Top = 110
+  end
+end

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/05/06 13:05:19.000.458,=C:\Users\frederick\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/06/30 15:51:24.000.377,=C:\Users\frederick\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/07/10 12:17:38.000.766,=C:\Users\frederick\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/07/25 12:51:19.000.089,=C:\Users\frederick\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/07/25 12:56:44.000.162,C:\Projetos\Folha de Ponto\src\FormTelaLogin.pas=C:\Users\frederick\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/07/25 12:56:44.000.162,C:\Projetos\Folha de Ponto\src\FormTelaLogin.dfm=C:\Users\frederick\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2025/07/25 12:57:01.000.633,C:\Projetos\Folha de Ponto\src\Project_FolhaPonto.dproj=C:\Users\frederick\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2025/07/25 13:14:25.000.316,=C:\Projetos\Folha de Ponto\src\Unit1.pas</Transaction>
+    <Transaction>2025/07/25 13:14:40.000.230,C:\Projetos\Folha de Ponto\src\DataConexao.dfm=C:\Projetos\Folha de Ponto\src\Unit1.dfm</Transaction>
+    <Transaction>2025/07/25 13:14:40.000.230,C:\Projetos\Folha de Ponto\src\DataConexao.pas=C:\Projetos\Folha de Ponto\src\Unit1.pas</Transaction>
+    <Transaction>2025/07/25 13:16:33.000.042,=C:\Projetos\Folha de Ponto\src\Unit2.pas</Transaction>
+    <Transaction>2025/07/25 13:16:46.000.613,C:\Projetos\Folha de Ponto\src\DataTelaLogin.pas=C:\Projetos\Folha de Ponto\src\Unit2.pas</Transaction>
+    <Transaction>2025/07/25 13:16:46.000.613,C:\Projetos\Folha de Ponto\src\DataTelaLogin.dfm=C:\Projetos\Folha de Ponto\src\Unit2.dfm</Transaction>
+    <Transaction>2025/07/25 14:21:14.257,=C:\Projetos\Folha de Ponto\src\Unit1.pas</Transaction>
+    <Transaction>2025/07/25 14:21:54.437,C:\Projetos\Folha de Ponto\src\FormPrincipalBase.pas=C:\Projetos\Folha de Ponto\src\Unit1.pas</Transaction>
+    <Transaction>2025/07/25 14:21:54.437,C:\Projetos\Folha de Ponto\src\FormPrincipalBase.dfm=C:\Projetos\Folha de Ponto\src\Unit1.dfm</Transaction>
+    <Transaction>2025/07/25 14:25:14.625,=C:\Projetos\Folha de Ponto\src\Unit1.pas</Transaction>
+    <Transaction>2025/07/25 14:26:49.205,=C:\Projetos\Folha de Ponto\src\Unit1.pas</Transaction>
+    <Transaction>2025/07/25 14:33:52.770,=C:\Projetos\Folha de Ponto\src\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

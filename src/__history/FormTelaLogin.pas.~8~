@@ -1,0 +1,39 @@
+﻿unit FormTelaLogin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls, DataTelaLogin;
+
+type
+  TTelaLogin = class(TForm)
+    pnlBackground: TPanel;
+    lbledtLogin: TLabeledEdit;
+    lbledtSenha: TLabeledEdit;
+    btnEntrar: TButton;
+    procedure btnEntrarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  TelaLogin: TTelaLogin;
+
+implementation
+
+{$R *.dfm}
+
+procedure TTelaLogin.btnEntrarClick(Sender: TObject);
+var
+  Login, Senha: string;
+begin
+  Login := lbledtLogin.Text;
+  Senha := lbledtSenha.Text;
+  DataModuleTelaLogin.FazerLogin(Login, Senha)
+end;
+
+end.
