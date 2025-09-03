@@ -19,6 +19,9 @@ type
     { Public declarations }
   end;
 
+var
+  FrameConfig: TFrameConfig;
+
 implementation
 
 {$R *.dfm}

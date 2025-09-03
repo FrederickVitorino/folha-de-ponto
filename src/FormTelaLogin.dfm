@@ -1,29 +1,34 @@
 object TelaLogin: TTelaLogin
   Left = 694
   Top = 295
-  Anchors = []
   AutoSize = True
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Sistema de Folha de Ponto'
-  ClientHeight = 409
-  ClientWidth = 506
+  ClientHeight = 411
+  ClientWidth = 514
   Color = clBtnFace
+  Constraints.MaxHeight = 449
+  Constraints.MaxWidth = 526
+  Constraints.MinHeight = 449
+  Constraints.MinWidth = 526
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Position = poDesigned
+  Position = poScreenCenter
   OnKeyPress = FormKeyPress
   TextHeight = 15
   object pnlBackground: TPanel
     Left = 0
     Top = 0
-    Width = 506
-    Height = 409
+    Width = 514
+    Height = 411
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 500
-    ExplicitHeight = 400
+    ExplicitWidth = 510
+    ExplicitHeight = 410
     object lbledtLogin: TLabeledEdit
       Left = 174
       Top = 147

@@ -34,22 +34,27 @@ procedure TDataModuleTelaLogin.FazerLogin(Login, Senha: string);
 var
   user_id: Integer;
 begin
-  fdqryUser.Close;
-  fdqryUser.Open;
   user_id := ValidaLogin(Login, Senha);
 
   if user_id = -1 then
   begin
     ShowMessage('Senha ou login incorreto!!');
-    exit;
+    Exit;
   end;
 
   if not Assigned(PrincipalBase) then
-    TPrincipalBase.Create(nil);
+  begin
+    PrincipalBase := TPrincipalBase.Create(nil);
+  end;
 
-  PrincipalBase.UserId := user_id;
-  TelaLogin.Hide;
-  PrincipalBase.Show;
+  try
+    PrincipalBase.UserId := user_id;
+    TelaLogin.Hide;
+    PrincipalBase.ShowModal;
+  finally
+    TelaLogin.Show;
+    FreeAndNil(PrincipalBase);
+  end;
 end;
 
 function TDataModuleTelaLogin.ValidaLogin(Login, Senha: string): Integer;
@@ -57,20 +62,22 @@ var
   auxLogin, auxSenha: string;
   user_id: Integer;
 begin
-  user_id := -1;
-  while not fdqryUser.Eof do
-  begin
-    auxLogin := fdqryUser.FieldByName('login').AsString;
-    auxSenha := fdqryUser.FieldByName('senha').AsString;
+  fdqryUser.Close;
+  fdqryuser.ParamByName('pLOGIN').AsString := Login;
+  fdqryUser.Open;
 
-    if (auxLogin = Login) and (auxSenha = Senha) then
-    begin
-      user_id := fdqryUser.FieldByName('user_id').AsInteger;
-      Break;
-    end
-    else
-      fdqryUser.Next;
+  auxLogin := fdqryUser.FieldByName('login').AsString;
+  auxSenha := fdqryUser.FieldByName('senha').AsString;
+
+  if (auxLogin = Login) and (auxSenha = Senha) then
+  begin
+    user_id := fdqryUser.FieldByName('user_id').AsInteger;
+  end
+  else
+  begin
+    user_id := -1;
   end;
+
   Result := user_id;
 end;
 

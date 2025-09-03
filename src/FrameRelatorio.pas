@@ -15,6 +15,9 @@ type
     { Public declarations }
   end;
 
+var
+  RelatorioFrame: TRelatorioFrame;
+
 implementation
 
 {$R *.dfm}

@@ -1,12 +1,18 @@
 object DataModuleTelaLogin: TDataModuleTelaLogin
-  Height = 248
-  Width = 323
-  PixelsPerInch = 120
+  Height = 328
+  Width = 424
   object fdqryUser: TFDQuery
     Connection = DataModuleConexao.con
     SQL.Strings = (
-      'SELECT user_id, login, senha FROM Usuario;')
-    Left = 48
-    Top = 30
+      'SELECT user_id, login, senha FROM Usuario WHERE login = :pLOGIN;')
+    Left = 38
+    Top = 24
+    ParamData = <
+      item
+        Name = 'PLOGIN'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end

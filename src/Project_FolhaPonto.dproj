@@ -106,26 +106,21 @@
         </DCCReference>
         <DCCReference Include="DataConexao.pas">
             <Form>DataModuleConexao</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="DataTelaLogin.pas">
             <Form>DataModuleTelaLogin</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="FormPrincipalBase.pas">
             <Form>Form1</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="FrameConfiguracao.pas">
             <Form>FrameConfig</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="FrameRelatorio.pas">
             <Form>RelatorioFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Base">

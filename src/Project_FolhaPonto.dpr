@@ -5,6 +5,7 @@ uses
   FormTelaLogin in 'FormTelaLogin.pas' {TelaLogin},
   Vcl.Themes,
   Vcl.Styles,
+  Vcl.Controls,
   DataConexao in 'DataConexao.pas' {DataModuleConexao: TDataModule},
   DataTelaLogin in 'DataTelaLogin.pas' {DataModuleTelaLogin: TDataModule},
   FormPrincipalBase in 'FormPrincipalBase.pas' {Form1},
@@ -16,9 +17,12 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TTelaLogin, TelaLogin);
+
   Application.CreateForm(TDataModuleConexao, DataModuleConexao);
   Application.CreateForm(TDataModuleTelaLogin, DataModuleTelaLogin);
+
+  Application.CreateForm(TTelaLogin, TelaLogin);
   Application.CreateForm(TPrincipalBase, PrincipalBase);
+
   Application.Run;
 end.

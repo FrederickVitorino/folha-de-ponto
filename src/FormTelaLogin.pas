@@ -30,10 +30,15 @@ var
 begin
   Login := lbledtLogin.Text;
   Senha := lbledtSenha.Text;
-//  if (Login <> '') and (Senha <> '') then
-    DataModuleTelaLogin.FazerLogin(Login, Senha)
-//  else
-//    ShowMessage('Preencha todos os campos.');
+  try
+    if (Login <> '') and (Senha <> '') then
+      DataModuleTelaLogin.FazerLogin(Login, Senha)
+    else
+     ShowMessage('Preencha todos os campos.');
+  finally
+    lbledtLogin.Clear;
+    lbledtSenha.Clear;
+  end;
 end;
 
 procedure TTelaLogin.FormKeyPress(Sender: TObject; var Key: Char);
