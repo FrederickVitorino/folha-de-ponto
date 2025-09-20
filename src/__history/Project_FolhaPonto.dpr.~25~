@@ -1,0 +1,28 @@
+﻿program Project_FolhaPonto;
+
+uses
+  Vcl.Forms,
+  FormTelaLogin in 'FormTelaLogin.pas' {TelaLogin},
+  Vcl.Themes,
+  Vcl.Styles,
+  Vcl.Controls,
+  DataConexao in 'DataConexao.pas' {DataModuleConexao: TDataModule},
+  DataTelaLogin in 'DataTelaLogin.pas' {DataModuleTelaLogin: TDataModule},
+  FormPrincipalBase in 'FormPrincipalBase.pas' {Form1},
+  FrameConfiguracao in 'FrameConfiguracao.pas' {FrameConfig: TFrame},
+  FrameRelatorio in 'FrameRelatorio.pas' {RelatorioFrame: TFrame},
+  DataPrincipalBase in 'DataPrincipalBase.pas' {DataModulePrincipalBase: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+
+  Application.CreateForm(TDataModuleConexao, DataModuleConexao);
+  Application.CreateForm(TDataModuleTelaLogin, DataModuleTelaLogin);
+  Application.CreateForm(TTelaLogin, TelaLogin);
+  Application.CreateForm(TPrincipalBase, PrincipalBase);
+  Application.CreateForm(TDataModulePrincipalBase, DataModulePrincipalBase);
+  Application.Run;
+end.

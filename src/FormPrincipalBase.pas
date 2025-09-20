@@ -9,18 +9,17 @@ uses
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
   FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, DataConexao,
   Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Buttons, Vcl.Imaging.pngimage, FrameConfiguracao, FrameRelatorio,
-  Vcl.Menus;
+  Vcl.Menus, DataPrincipalBase;
 
 type
   TPrincipalBase = class(TForm)
-    fdqryDadosUser: TFDQuery;
     Panel1: TPanel;
     pnlTela: TPanel;
     Panel2: TPanel;
     btnConfiguracao: TSpeedButton;
     btnRelatorio: TSpeedButton;
     Panel3: TPanel;
-    Image1: TImage;
+    ImgUsuario: TImage;
     lblNomeCompleto: TLabel;
     btnSair: TSpeedButton;
     TrayIcon: TTrayIcon;
@@ -41,18 +40,18 @@ type
     procedure TrayIconDblClick(Sender: TObject);
     procedure btnMinimizarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     FUserId: Integer;
     FActiveFrame: TFrame;
     procedure SetUserId(const Value: Integer);
-    procedure ShowFrame<T: TFrame>;
-    procedure HideAllFrames;
-    procedure RestaurarApp;
-    { Private declarations }
+    procedure SetActiveFrame(const Value: TFrame);
+    procedure MostrarDadosUsuario();
   public
     { Public declarations }
   published
     property UserId: Integer read FUserId write SetUserId;
+    property ActiveFrame: TFrame read FActiveFrame write SetActiveFrame;
   end;
 
 var
@@ -61,11 +60,16 @@ var
 implementation
 
 uses
-  FormTelaLogin;
+  FormTelaInicial;
 
 {$R *.dfm}
 
 { TPrincipalBase }
+
+procedure TPrincipalBase.SetActiveFrame(const Value: TFrame);
+begin
+  FActiveFrame := Value;
+end;
 
 procedure TPrincipalBase.SetUserId(const Value: Integer);
 begin
@@ -74,7 +78,7 @@ end;
 
 procedure TPrincipalBase.TrayIconDblClick(Sender: TObject);
 begin
-  RestaurarApp;
+  dtmPrincipalBase.RestaurarApp;
 end;
 
 procedure TPrincipalBase.FormClose(Sender: TObject;
@@ -88,14 +92,6 @@ begin
   SetBounds(0, 0, Screen.Width, Screen.Height);
   TrayIcon.Icon := Application.Icon;
   TrayIcon.Visible := True;
-
-  fdqryDadosUser.Close;
-  fdqryDadosUser.ParamByName('USER_ID').AsInteger := UserId;
-  fdqryDadosUser.Open;
-
-  {TrayIcon.BalloonTitle := 'Sistema Minimizado';
-  TrayIcon.BalloonHint := 'O sistema foi minimizado para a área de notificação.';
-  TrayIcon.ShowBalloonHint; }
 end;
 
 procedure TPrincipalBase.FormResize(Sender: TObject);
@@ -107,28 +103,26 @@ begin
   end;
 end;
 
-procedure TPrincipalBase.HideAllFrames;
-var
-  i: Integer;
+procedure TPrincipalBase.FormShow(Sender: TObject);
 begin
-  for i := 0 to pnlTela.ControlCount - 1 do
+  with dtmPrincipalBase.fdqryDadosUser do
   begin
-    if pnlTela.Controls[i] is TFrame then
-      pnlTela.Controls[i].Visible := False;
+    Close;
+    ParamByName('USER_ID').AsInteger := UserId;
+    Open;
   end;
-end;
 
-procedure TPrincipalBase.RestaurarApp;
-begin
-  Self.Show;
-  Self.WindowState := wsMaximized;
-  Self.BringToFront;
-  SetForegroundWindow(Handle);
+  TrayIcon.BalloonTitle := 'Sistema Folha de Ponto';
+  TrayIcon.BalloonHint := 'O sistema está sendo executado na área de notificação';
+  TrayIcon.ShowBalloonHint;
+
+  MostrarDadosUsuario;
 end;
 
 procedure TPrincipalBase.miRestaurarClick(Sender: TObject);
 begin
-  RestaurarApp;
+  dtmPrincipalBase.RestaurarApp;
+  SetForegroundWindow(Handle);
 end;
 
 procedure TPrincipalBase.miSairClick(Sender: TObject);
@@ -136,34 +130,29 @@ begin
   Self.Close;
 end;
 
-procedure TPrincipalBase.ShowFrame<T>;
+procedure TPrincipalBase.MostrarDadosUsuario;
 var
-  Frame: T;
+  CaminhoImagem: string;
 begin
-  HideAllFrames;
+  lblNomeCompleto.Caption := dtmPrincipalBase.fdqryDadosUsernome_completo.AsString;
 
-  Frame := T(FindComponent(T.ClassName));
+  CaminhoImagem := 'C:\Users\USER\Downloads\Folha de Ponto\Folha de Ponto\imagens\imagens-usuario\' +
+                   IntToStr(UserId) + '.png';
 
-  if not Assigned(Frame) then
-  begin
-    Frame := T.Create(Self);
-    Frame.Name := T.ClassName;;
-    Frame.Parent := pnlTela;
-    Frame.Align := alClient;
-  end;
+  if not FileExists(CaminhoImagem) then
+    CaminhoImagem := 'C:\Users\USER\Downloads\Folha de Ponto\Folha de Ponto\imagens\imagens-usuario\1.png';
 
-  Frame.Visible := True;
-  FActiveFrame := Frame;
+  ImgUsuario.Picture.LoadFromFile(CaminhoImagem);
 end;
 
 procedure TPrincipalBase.btnConfiguracaoClick(Sender: TObject);
 begin
-  ShowFrame<TFrameConfig>;
+  dtmPrincipalBase.ShowFrame<TConfigFrame>;
 end;
 
 procedure TPrincipalBase.btnFecharClick(Sender: TObject);
 begin
-  Self.Close;
+  Application.Terminate;
 end;
 
 procedure TPrincipalBase.btnMinimizarClick(Sender: TObject);
@@ -173,12 +162,12 @@ end;
 
 procedure TPrincipalBase.btnRelatorioClick(Sender: TObject);
 begin
-  ShowFrame<TRelatorioFrame>;
+  dtmPrincipalBase.ShowFrame<TRelatorioFrame>;
 end;
 
 procedure TPrincipalBase.btnSairClick(Sender: TObject);
 begin
-  HideAllFrames;
+  dtmPrincipalBase.HideAllFrames;
   Self.Close;
 end;
 

@@ -7,7 +7,7 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
 
 type
-  TFrameConfig = class(TFrame)
+  TConfigFrame = class(TFrame)
     Button1: TButton;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -20,7 +20,7 @@ type
   end;
 
 var
-  FrameConfig: TFrameConfig;
+  ConfigFrame: TConfigFrame;
 
 implementation
 

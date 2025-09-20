@@ -1,0 +1,261 @@
+object TelaInicial: TTelaInicial
+  Left = 694
+  Top = 295
+  Width = 526
+  Height = 449
+  AutoSize = True
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Sistema de Folha de Ponto'
+  Color = clBtnFace
+  Constraints.MaxHeight = 449
+  Constraints.MaxWidth = 526
+  Constraints.MinHeight = 449
+  Constraints.MinWidth = 526
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poScreenCenter
+  TextHeight = 15
+  object pnlBackground: TPanel
+    Left = 0
+    Top = 0
+    Width = 510
+    Height = 410
+    Align = alClient
+    TabOrder = 0
+    object ntbkTelaInicial: TNotebook
+      Left = 1
+      Top = 1
+      Width = 508
+      Height = 408
+      Align = alClient
+      PageIndex = 1
+      TabOrder = 0
+      ExplicitLeft = 248
+      ExplicitTop = 160
+      ExplicitWidth = 150
+      ExplicitHeight = 150
+      object TPage
+        Left = 0
+        Top = 0
+        Caption = 'Login'
+        object Panel3: TPanel
+          Left = 0
+          Top = 0
+          Width = 508
+          Height = 408
+          Align = alClient
+          BevelOuter = bvNone
+          TabOrder = 0
+          object btnEntrar: TButton
+            Left = 207
+            Top = 214
+            Width = 67
+            Height = 38
+            Caption = 'Entrar'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+          end
+          object lbledtSenha: TLabeledEdit
+            Left = 161
+            Top = 169
+            Width = 160
+            Height = 28
+            EditLabel.Width = 40
+            EditLabel.Height = 20
+            EditLabel.Caption = 'Senha'
+            EditLabel.Font.Charset = DEFAULT_CHARSET
+            EditLabel.Font.Color = clWindowText
+            EditLabel.Font.Height = -15
+            EditLabel.Font.Name = 'Segoe UI'
+            EditLabel.Font.Style = []
+            EditLabel.ParentFont = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            PasswordChar = '*'
+            TabOrder = 1
+            Text = ''
+          end
+          object lbledtLogin: TLabeledEdit
+            Left = 161
+            Top = 110
+            Width = 160
+            Height = 28
+            EditLabel.Width = 37
+            EditLabel.Height = 20
+            EditLabel.Caption = 'Login'
+            EditLabel.Font.Charset = DEFAULT_CHARSET
+            EditLabel.Font.Color = clWindowText
+            EditLabel.Font.Height = -15
+            EditLabel.Font.Name = 'Segoe UI'
+            EditLabel.Font.Style = []
+            EditLabel.ParentFont = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 2
+            Text = ''
+          end
+        end
+      end
+      object TPage
+        Left = 0
+        Top = 0
+        Caption = 'Configura'#231#227'o'
+        object Panel1: TPanel
+          Left = 0
+          Top = 0
+          Width = 508
+          Height = 408
+          Align = alClient
+          BevelOuter = bvNone
+          TabOrder = 0
+          object btnSalvarConfigBD: TButton
+            Left = 160
+            Top = 353
+            Width = 153
+            Height = 38
+            Caption = 'Salvar Configura'#231#245'es'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+          end
+          object lbledtPortaServerBD: TLabeledEdit
+            Left = 57
+            Top = 311
+            Width = 408
+            Height = 28
+            EditLabel.Width = 115
+            EditLabel.Height = 20
+            EditLabel.Caption = 'Porta do Servidor'
+            EditLabel.Font.Charset = DEFAULT_CHARSET
+            EditLabel.Font.Color = clWindowText
+            EditLabel.Font.Height = -15
+            EditLabel.Font.Name = 'Segoe UI'
+            EditLabel.Font.Style = []
+            EditLabel.ParentFont = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            Text = ''
+          end
+          object lbledtIPServerBD: TLabeledEdit
+            Left = 57
+            Top = 249
+            Width = 408
+            Height = 28
+            EditLabel.Width = 93
+            EditLabel.Height = 20
+            EditLabel.Caption = 'IP do Servidor'
+            EditLabel.Font.Charset = DEFAULT_CHARSET
+            EditLabel.Font.Color = clWindowText
+            EditLabel.Font.Height = -15
+            EditLabel.Font.Name = 'Segoe UI'
+            EditLabel.Font.Style = []
+            EditLabel.ParentFont = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 2
+            Text = ''
+          end
+          object lbledtSenhaBD: TLabeledEdit
+            Left = 57
+            Top = 188
+            Width = 408
+            Height = 28
+            EditLabel.Width = 40
+            EditLabel.Height = 20
+            EditLabel.Caption = 'Senha'
+            EditLabel.Font.Charset = DEFAULT_CHARSET
+            EditLabel.Font.Color = clWindowText
+            EditLabel.Font.Height = -15
+            EditLabel.Font.Name = 'Segoe UI'
+            EditLabel.Font.Style = []
+            EditLabel.ParentFont = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 3
+            Text = ''
+          end
+          object lbledtUserBD: TLabeledEdit
+            Left = 57
+            Top = 129
+            Width = 408
+            Height = 28
+            EditLabel.Width = 50
+            EditLabel.Height = 20
+            EditLabel.Caption = 'Usu'#225'rio'
+            EditLabel.Font.Charset = DEFAULT_CHARSET
+            EditLabel.Font.Color = clWindowText
+            EditLabel.Font.Height = -15
+            EditLabel.Font.Name = 'Segoe UI'
+            EditLabel.Font.Style = []
+            EditLabel.ParentFont = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 4
+            Text = ''
+          end
+          object lbledtNomeBD: TLabeledEdit
+            Left = 57
+            Top = 71
+            Width = 408
+            Height = 28
+            EditLabel.Width = 154
+            EditLabel.Height = 20
+            EditLabel.Caption = 'Nome Banco de Dados'
+            EditLabel.Font.Charset = DEFAULT_CHARSET
+            EditLabel.Font.Color = clWindowText
+            EditLabel.Font.Height = -15
+            EditLabel.Font.Name = 'Segoe UI'
+            EditLabel.Font.Style = []
+            EditLabel.ParentFont = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 5
+            Text = ''
+          end
+        end
+      end
+    end
+  end
+end

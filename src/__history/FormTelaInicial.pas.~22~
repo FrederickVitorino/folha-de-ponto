@@ -1,0 +1,111 @@
+﻿unit FormTelaInicial;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls, DataTelaInicial, Vcl.ComCtrls, Vcl.TabNotBk;
+
+type
+  TTelaInicial = class(TForm)
+    pnlBackground: TPanel;
+    nb1: TTabbedNotebook;
+    btnEntrar: TButton;
+    btnSalvarConfigBD: TButton;
+    lbledtLogin: TLabeledEdit;
+    lbledtSenha: TLabeledEdit;
+    lbledtNomeBD: TLabeledEdit;
+    lbledtIPServerBD: TLabeledEdit;
+    lbledtPortaServerBD: TLabeledEdit;
+    lbledtUserBD: TLabeledEdit;
+    lbledtSenhaBD: TLabeledEdit;
+    ntbkTelaInicial: TNotebook;
+    Panel1: TPanel;
+    Button1: TButton;
+    LabeledEdit1: TLabeledEdit;
+    LabeledEdit2: TLabeledEdit;
+    procedure btnEntrarClick(Sender: TObject);
+    procedure btnSalvarConfigBDClick(Sender: TObject);
+    procedure nb1Change(Sender: TObject; NewTab: Integer;
+      var AllowChange: Boolean);
+    procedure lbledtSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure lbledtLoginKeyPress(Sender: TObject; var Key: Char);
+  end;
+
+var
+  TelaInicial: TTelaInicial;
+
+implementation
+
+uses DataConexao;
+
+{$R *.dfm}
+
+procedure TTelaInicial.btnEntrarClick(Sender: TObject);
+var
+  Login, Senha: string;
+begin
+  Login := LabeledEdit2.Text;
+  Senha := LabeledEdit1.Text;
+  try
+    //if (Login <> '') and (Senha <> '') then
+      dtmTelaInicial.FazerLogin(Login, Senha)
+    //else
+    //ShowMessage('Preencha todos os campos.');
+  finally
+    lbledtLogin.Clear;
+    lbledtSenha.Clear;
+  end;
+end;
+
+procedure TTelaInicial.btnSalvarConfigBDClick(Sender: TObject);
+var
+  NomeBD, IP, Porta, Username, Senha: string;
+begin
+  NomeBD := lbledtNomeBD.Text;
+  IP := lbledtIPServerBD.Text;
+  Porta := lbledtPortaServerBD.Text;
+  Username := lbledtUserBD.Text;
+  Senha := lbledtSenhaBD.Text;
+
+  dtmConexao.AtualizarArqConfigBD(NomeBD, IP, Porta, Username, Senha);
+  dtmConexao.AlterarConfigBD(NomeBD, IP, Porta, Username, Senha);
+
+  ShowMessage('Configurações do banco de dados atualizadas com sucesso!');
+end;
+
+procedure TTelaInicial.lbledtLoginKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  begin
+    btnEntrar.Click; // Aciona o botão "Entrar"
+  end;
+end;
+procedure TTelaInicial.lbledtSenhaKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  begin
+    btnEntrar.Click; // Aciona o botão "Entrar"
+  end;
+end;
+
+
+procedure TTelaInicial.nb1Change(Sender: TObject; NewTab: Integer; var AllowChange: Boolean);
+var
+  SL: TStringList;
+begin
+  if NewTab = 1 then
+  begin
+    SL := TStringList.Create;
+    SL.LoadFromFile('.\Config\BDConfig.txt');
+
+    lbledtNomeBD.Text := SL.Values['Database'];
+    lbledtIPServerBD.Text := SL.Values['User_Name'];
+    lbledtPortaServerBD.Text := SL.Values['Password'];
+    lbledtUserBD.Text := SL.Values['Server'];
+    lbledtSenhaBD.Text := SL.Values['Port'];
+  end;
+end;
+
+end.

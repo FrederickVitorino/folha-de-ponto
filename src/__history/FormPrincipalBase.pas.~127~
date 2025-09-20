@@ -1,0 +1,157 @@
+unit FormPrincipalBase;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, DataConexao,
+  Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Buttons, Vcl.Imaging.pngimage, FrameConfiguracao, FrameRelatorio,
+  Vcl.Menus;
+
+type
+  TPrincipalBase = class(TForm)
+    Panel1: TPanel;
+    pnlTela: TPanel;
+    Panel2: TPanel;
+    btnConfiguracao: TSpeedButton;
+    btnRelatorio: TSpeedButton;
+    Panel3: TPanel;
+    Image1: TImage;
+    lblNomeCompleto: TLabel;
+    btnSair: TSpeedButton;
+    TrayIcon: TTrayIcon;
+    PopupMenu: TPopupMenu;
+    miRestaurar: TMenuItem;
+    miSair: TMenuItem;
+    pnlBarra: TPanel;
+    btnFechar: TSpeedButton;
+    btnMinimizar: TSpeedButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnConfiguracaoClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
+    procedure btnRelatorioClick(Sender: TObject);
+    procedure miRestaurarClick(Sender: TObject);
+    procedure miSairClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure TrayIconDblClick(Sender: TObject);
+    procedure btnMinimizarClick(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    FUserId: Integer;
+    FActiveFrame: TFrame;
+    procedure SetUserId(const Value: Integer);
+    procedure SetActiveFrame(const Value: TFrame);
+    { Private declarations }
+  public
+    { Public declarations }
+  published
+    property UserId: Integer read FUserId write SetUserId;
+    property ActiveFrame: TFrame read FActiveFrame write SetActiveFrame;
+  end;
+
+var
+  PrincipalBase: TPrincipalBase;
+
+implementation
+
+uses
+  FormTelaLogin, DataPrincipalBase;
+
+{$R *.dfm}
+
+{ TPrincipalBase }
+
+procedure TPrincipalBase.SetActiveFrame(const Value: TFrame);
+begin
+  FActiveFrame := Value;
+end;
+
+procedure TPrincipalBase.SetUserId(const Value: Integer);
+begin
+  FUserId := Value;
+end;
+
+procedure TPrincipalBase.TrayIconDblClick(Sender: TObject);
+begin
+  dtmPrincipalBase.RestaurarApp;
+end;
+
+procedure TPrincipalBase.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TPrincipalBase.FormCreate(Sender: TObject);
+begin
+  SetBounds(0, 0, Screen.Width, Screen.Height);
+  TrayIcon.Icon := Application.Icon;
+  TrayIcon.Visible := True;
+end;
+
+procedure TPrincipalBase.FormResize(Sender: TObject);
+begin
+  if Self.WindowState = wsMinimized then
+  begin
+    Hide;
+    TrayIcon.Visible := True;
+  end;
+end;
+
+procedure TPrincipalBase.FormShow(Sender: TObject);
+begin
+  with dtmPrincipalBase.fdqryDadosUser do
+  begin
+    Close;
+    ParamByName('USER_ID').AsInteger := UserId;
+    Open;
+  end;
+
+  TrayIcon.BalloonTitle := 'Sistema Folha de Ponto';
+  TrayIcon.BalloonHint := 'O sistema está sendo executado na área de notificação';
+  TrayIcon.ShowBalloonHint;
+end;
+
+procedure TPrincipalBase.miRestaurarClick(Sender: TObject);
+begin
+  dtmPrincipalBase.RestaurarApp;
+  SetForegroundWindow(Handle);
+end;
+
+procedure TPrincipalBase.miSairClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure TPrincipalBase.btnConfiguracaoClick(Sender: TObject);
+begin
+  dtmPrincipalBase.ShowFrame<TConfigFrame>;
+end;
+
+procedure TPrincipalBase.btnFecharClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TPrincipalBase.btnMinimizarClick(Sender: TObject);
+begin
+  Self.WindowState := wsMinimized;
+end;
+
+procedure TPrincipalBase.btnRelatorioClick(Sender: TObject);
+begin
+  dtmPrincipalBase.ShowFrame<TRelatorioFrame>;
+end;
+
+procedure TPrincipalBase.btnSairClick(Sender: TObject);
+begin
+  dtmPrincipalBase.HideAllFrames;
+  Self.Close;
+end;
+
+end.

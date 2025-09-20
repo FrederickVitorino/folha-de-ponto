@@ -1,15 +1,15 @@
-object DataModuleConexao: TDataModuleConexao
+object dtmConexao: TdtmConexao
+  OnCreate = DataModuleCreate
   Height = 480
   Width = 640
   object con: TFDConnection
     Params.Strings = (
-      'Database=ERB Technology'
-      'User_Name=postgres'
-      'Password=Let@2016'
-      'Port=5433'
       'CharacterSet=UTF8'
-      'Server=192.168.1.9'
-      'DriverID=PG')
+      'Server=localhost'
+      'DriverID=PG'
+      'Database=postgres'
+      'User_Name=postgres'
+      'Password=123')
     LoginPrompt = False
     Left = 336
     Top = 128

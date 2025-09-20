@@ -1,0 +1,18 @@
+object dtmPrincipalBase: TdtmPrincipalBase
+  Height = 480
+  Width = 640
+  object fdqryDadosUser: TFDQuery
+    Connection = dtmConexao.con
+    SQL.Strings = (
+      'SELECT * FROM Usuario WHERE user_id = :USER_ID')
+    Left = 152
+    Top = 32
+    ParamData = <
+      item
+        Name = 'USER_ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+end

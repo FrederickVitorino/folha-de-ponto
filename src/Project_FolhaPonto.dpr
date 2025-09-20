@@ -2,27 +2,28 @@
 
 uses
   Vcl.Forms,
-  FormTelaLogin in 'FormTelaLogin.pas' {TelaLogin},
+  FormTelaInicial in 'FormTelaInicial.pas' {TelaInicial},
   Vcl.Themes,
   Vcl.Styles,
   Vcl.Controls,
-  DataConexao in 'DataConexao.pas' {DataModuleConexao: TDataModule},
-  DataTelaLogin in 'DataTelaLogin.pas' {DataModuleTelaLogin: TDataModule},
+  DataConexao in 'DataConexao.pas' {dtmConexao: TDataModule},
+  DataTelaInicial in 'DataTelaInicial.pas' {dtmTelaInicial: TDataModule},
   FormPrincipalBase in 'FormPrincipalBase.pas' {Form1},
-  FrameConfiguracao in 'FrameConfiguracao.pas' {FrameConfig: TFrame},
-  FrameRelatorio in 'FrameRelatorio.pas' {RelatorioFrame: TFrame};
+  FrameConfiguracao in 'FrameConfiguracao.pas' {ConfigFrame: TFrame},
+  FrameRelatorio in 'FrameRelatorio.pas' {RelatorioFrame: TFrame},
+  DataPrincipalBase in 'DataPrincipalBase.pas' {dtmPrincipalBase: TDataModule};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-
-  Application.CreateForm(TDataModuleConexao, DataModuleConexao);
-  Application.CreateForm(TDataModuleTelaLogin, DataModuleTelaLogin);
-
-  Application.CreateForm(TTelaLogin, TelaLogin);
+  //
+  Application.CreateForm(TdtmConexao, dtmConexao);
+  Application.CreateForm(TdtmTelaInicial, dtmTelaInicial);
+  Application.CreateForm(TdtmPrincipalBase, dtmPrincipalBase);
+  //
+  Application.CreateForm(TTelaInicial, TelaInicial);
   Application.CreateForm(TPrincipalBase, PrincipalBase);
-
   Application.Run;
 end.

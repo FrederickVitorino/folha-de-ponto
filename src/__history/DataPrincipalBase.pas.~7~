@@ -1,0 +1,85 @@
+﻿unit DataPrincipalBase;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Forms;
+
+type
+  TDataModulePrincipalBase = class(TDataModule)
+    fdqryDadosUser: TFDQuery;
+  private
+    { Private declarations }
+  public
+    procedure ShowFrame<T: TFrame>;
+    procedure HideAllFrames;
+    procedure RestaurarApp();
+    { Public declarations }
+  end;
+
+var
+  DataModulePrincipalBase: TDataModulePrincipalBase;
+
+implementation
+
+uses
+  FormPrincipalBase;
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TDataModulePrincipalBase.ShowFrame<T>;
+var
+  Frame: T;
+begin
+  with PrincipalBase do
+  begin
+    HideAllFrames;
+
+    Frame := T(FindComponent(T.ClassName));
+
+    if not Assigned(Frame) then
+    begin
+      Frame := T.Create(Self);
+      Frame.Name := T.ClassName;;
+      Frame.Parent := pnlTela;
+      Frame.Align := alClient;
+    end;
+
+    Frame.Visible := True;
+    FActiveFrame := Frame;
+  end;
+end;
+
+procedure TDataModulePrincipalBase.HideAllFrames;
+var
+  i: Integer;
+begin
+  with PrincipalBase do
+  begin
+    for i := 0 to pnlTela.ControlCount - 1 do
+    begin
+      if pnlTela.Controls[i] is TFrame then
+        pnlTela.Controls[i].Visible := False;
+    end;
+  end;
+
+
+end;
+
+procedure TDataModulePrincipalBase.RestaurarApp;
+begin
+  with PrincipalBase do
+  begin
+    Show;
+    WindowState := wsMaximized;
+    BringToFront;
+    SetForegroundWindow(Handle);
+  end;
+end;
+
+end.

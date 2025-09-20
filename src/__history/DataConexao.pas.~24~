@@ -1,0 +1,135 @@
+﻿unit DataConexao;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.PG,
+  FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
+  JvStringHolder;
+
+type
+  TdtmConexao = class(TDataModule)
+    con: TFDConnection;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    FNomeBD: string;
+    FSenha: string;
+    FPorta: string;
+    FIP: string;
+    FUsername: string;
+    procedure SetIP(const Value: string);
+    procedure SetNomeBD(const Value: string);
+    procedure SetPorta(const Value: string);
+    procedure SetSenha(const Value: string);
+    procedure SetUsername(const Value: string);
+    { Private declarations }
+  public
+    procedure AlterarConfigBD(NomeBD, IP, Porta, Username, Senha: string);
+    procedure AtualizarArqConfigBD(NomeBD, IP, Porta, Username, Senha: string);
+  published
+    property NomeBD: string read FNomeBD write SetNomeBD;
+    property IP: string read FIP write SetIP;
+    property Porta: string read FPorta write SetPorta;
+    property Username: string read FUsername write SetUsername;
+    property Senha: string read FSenha write SetSenha;
+  end;
+
+var
+  dtmConexao: TdtmConexao;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TdtmConexao.DataModuleCreate(Sender: TObject);
+var
+  SL: TStringList;
+begin
+  if (not DirectoryExists('.\Config')) then
+  begin
+    ForceDirectories('.\Config');
+  end;
+
+  FNomeBD := '';
+  FIP := '';
+  FPorta := '';
+  FUsername := '';
+  FSenha := '';
+
+  SL := TStringList.Create;
+  try
+    SL.LoadFromFile('.\Config\BDConfig.txt');
+
+    FNomeBD := SL.Values['Database'];
+    FIP := SL.Values['User_Name'];
+    FPorta := SL.Values['Password'];
+    FUsername := SL.Values['Server'];
+    FSenha := SL.Values['Port'];
+
+    AlterarConfigBD(FNomeBD, FIP, FPorta, FUsername, FSenha);
+  except
+    AtualizarArqConfigBD(NomeBD, IP, Porta, Username, Senha);
+  end;
+end;
+
+procedure TdtmConexao.SetIP(const Value: string);
+begin
+  FIP := Value;
+end;
+
+procedure TdtmConexao.SetNomeBD(const Value: string);
+begin
+  FNomeBD := Value;
+end;
+
+procedure TdtmConexao.SetPorta(const Value: string);
+begin
+  FPorta := Value;
+end;
+
+procedure TdtmConexao.SetSenha(const Value: string);
+begin
+  FSenha := Value;
+end;
+
+procedure TdtmConexao.SetUsername(const Value: string);
+begin
+  FUsername := Value;
+end;
+
+procedure TdtmConexao.AlterarConfigBD(NomeBD, IP, Porta, Username, Senha: string);
+begin
+  with dtmConexao.con do
+  begin
+    Params.Values['Database'] := NomeBD;
+    Params.Values['User_Name'] := Username;
+    Params.Values['Password'] := Senha;
+    Params.Values['Server'] := IP;
+    Params.Values['Port'] := Porta;
+  end;
+end;
+
+
+procedure TdtmConexao.AtualizarArqConfigBD(NomeBD, IP, Porta, Username, Senha: string);
+var
+  Arquivo: TextFile;
+  Linha: string;
+begin
+  AssignFile(Arquivo, '.\Config\BDConfig.txt');
+  Rewrite(Arquivo);
+
+  Linha := 'Database=' + NomeBD + sLineBreak +
+           'User_Name=' + IP + sLineBreak +
+           'Password=' + Porta + sLineBreak +
+           'Server=' + Username + sLineBreak +
+           'Port=' + Senha;
+
+  Writeln(Arquivo, Linha);
+  CloseFile(Arquivo);
+end;
+
+end.

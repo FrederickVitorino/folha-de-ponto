@@ -1,4 +1,4 @@
-object FrameConfig: TFrameConfig
+object ConfigFrame: TConfigFrame
   Left = 0
   Top = 0
   Width = 640
