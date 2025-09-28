@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask,
-  Vcl.ExtCtrls, DataTelaInicial, Vcl.ComCtrls, Vcl.TabNotBk;
+  Vcl.ExtCtrls, DataTelaInicial, Vcl.ComCtrls, Vcl.TabNotBk,
+  Vcl.Imaging.pngimage, FormConfirmacao;
 
 type
   TTelaInicial = class(TForm)
@@ -22,14 +23,21 @@ type
     lbledtSenhaBD: TLabeledEdit;
     lbledtUserBD: TLabeledEdit;
     lbledtNomeBD: TLabeledEdit;
-    Button1: TButton;
+    ImgConfig: TImage;
+    ImgVoltar: TImage;
     procedure btnEntrarClick(Sender: TObject);
     procedure btnSalvarConfigBDClick(Sender: TObject);
     procedure nb1Change(Sender: TObject; NewTab: Integer;
       var AllowChange: Boolean);
     procedure lbledtSenhaKeyPress(Sender: TObject; var Key: Char);
     procedure lbledtLoginKeyPress(Sender: TObject; var Key: Char);
-    procedure Button1Click(Sender: TObject);
+    procedure ImgConfigClick(Sender: TObject);
+    procedure ImgVoltarClick(Sender: TObject);
+    private
+    procedure SalvaConfigBD;
+    public
+
+
   end;
 
 var
@@ -45,7 +53,7 @@ procedure TTelaInicial.btnEntrarClick(Sender: TObject);
 var
   Login, Senha: string;
 begin
-Login := lbledtLogin.Text;
+  Login := lbledtLogin.Text;
   Senha := lbledtSenha.Text;
   try
     //if (Login <> '') and (Senha <> '') then
@@ -60,40 +68,78 @@ end;
 
 procedure TTelaInicial.btnSalvarConfigBDClick(Sender: TObject);
 var
-  NomeBD, IP, Porta, Username, Senha: string;
+  TelaConfirmacao: TConfirmacao;
+begin
+  try
+    TelaConfirmacao := TConfirmacao.Create(nil);
+
+    if not Assigned(Confirmacao) then
+      TelaConfirmacao := TConfirmacao.Create(nil);
+
+    TelaConfirmacao.Lbl1.Caption := 'Deseja mesmo alterar as configurações?';
+    TelaConfirmacao.pnlEdit.Visible := False;
+    TelaConfirmacao.Caption := 'Confirmação das alterações';
+    if TelaConfirmacao.ShowModal = mrOk then
+      SalvaConfigBD;
+  finally
+    TelaConfirmacao.Free;
+  end;
+end;
+
+procedure TTelaInicial.ImgVoltarClick(Sender: TObject);
+begin
+  ntbkTelaInicial.PageIndex := 0;
+end;
+
+procedure TTelaInicial.SalvaConfigBD;
+var
+  NomeBD: string;
+  IP: string;
+  Porta: string;
+  Username: string;
+  Senha: string;
 begin
   NomeBD := lbledtNomeBD.Text;
   IP := lbledtIPServerBD.Text;
   Porta := lbledtPortaServerBD.Text;
   Username := lbledtUserBD.Text;
   Senha := lbledtSenhaBD.Text;
-
   dtmConexao.AtualizarArqConfigBD(NomeBD, IP, Porta, Username, Senha);
   dtmConexao.AlterarConfigBD(NomeBD, IP, Porta, Username, Senha);
 
-  ShowMessage('Configurações do banco de dados atualizadas com sucesso!');
 end;
 
-procedure TTelaInicial.Button1Click(Sender: TObject);
+procedure TTelaInicial.ImgConfigClick(Sender: TObject);
+var
+  LConfirmacao: TConfirmacao;
 begin
-  ntbkTelaInicial.PageIndex := 0;
+  LConfirmacao := TConfirmacao.Create(nil);
+  try
+    LConfirmacao.Lbl1.Caption := 'Digite a senha para alterar o banco de dados.';
+    LConfirmacao.pnlEdit.Visible := True;
+
+    if LConfirmacao.ShowModal = mrOk then
+      if LConfirmacao.Edt1.Text = '123' then
+        ntbkTelaInicial.PageIndex := 1;
+  finally
+    LConfirmacao.Free;
+  end;
 end;
 
 procedure TTelaInicial.lbledtLoginKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
   begin
-    btnEntrar.Click; // Aciona o botão "Entrar"
+    btnEntrar.Click;
   end;
 end;
 procedure TTelaInicial.lbledtSenhaKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
   begin
-    btnEntrar.Click; // Aciona o botão "Entrar"
+    btnEntrar.Click;
   end;
 end;
-
 
 procedure TTelaInicial.nb1Change(Sender: TObject; NewTab: Integer; var AllowChange: Boolean);
 var
@@ -111,6 +157,5 @@ begin
     lbledtSenhaBD.Text := SL.Values['Port'];
   end;
 end;
-
 
 end.
