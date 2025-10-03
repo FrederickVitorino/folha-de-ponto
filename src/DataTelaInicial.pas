@@ -47,7 +47,6 @@ begin
     Exit;
   end;
 
-
   if not Assigned(PrincipalBase) then
   begin
     PrincipalBase := TPrincipalBase.Create(nil);

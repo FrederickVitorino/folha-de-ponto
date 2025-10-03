@@ -1,6 +1,6 @@
 object PrincipalBase: TPrincipalBase
-  Left = 403
-  Top = 213
+  Left = 218
+  Top = 89
   Margins.Left = 0
   Margins.Top = 0
   Margins.Right = 0
@@ -17,7 +17,7 @@ object PrincipalBase: TPrincipalBase
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Position = poScreenCenter
+  Position = poDesigned
   WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
