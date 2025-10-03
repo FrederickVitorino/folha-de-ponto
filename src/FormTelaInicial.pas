@@ -25,6 +25,9 @@ type
     lbledtNomeBD: TLabeledEdit;
     ImgConfig: TImage;
     ImgVoltar: TImage;
+    grdpnl1: TGridPanel;
+    pnl1: TPanel;
+    grdpnl2: TGridPanel;
     procedure btnEntrarClick(Sender: TObject);
     procedure btnSalvarConfigBDClick(Sender: TObject);
     procedure nb1Change(Sender: TObject; NewTab: Integer;
@@ -33,6 +36,7 @@ type
     procedure lbledtLoginKeyPress(Sender: TObject; var Key: Char);
     procedure ImgConfigClick(Sender: TObject);
     procedure ImgVoltarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     private
     procedure SalvaConfigBD;
     public
@@ -84,6 +88,11 @@ begin
   finally
     TelaConfirmacao.Free;
   end;
+end;
+
+procedure TTelaInicial.FormCreate(Sender: TObject);
+begin
+  ntbkTelaInicial.PageIndex := 0;
 end;
 
 procedure TTelaInicial.ImgVoltarClick(Sender: TObject);

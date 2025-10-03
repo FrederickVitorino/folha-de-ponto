@@ -54,10 +54,8 @@ begin
 
   try
     PrincipalBase.UserId := user_id;
-    TelaInicial.Hide;
     PrincipalBase.ShowModal;
   finally
-    TelaInicial.Show;
     FreeAndNil(PrincipalBase);
   end;
 end;

@@ -14,7 +14,6 @@ uses
 type
   TPrincipalBase = class(TForm)
     Panel1: TPanel;
-    pnlTela: TPanel;
     Panel2: TPanel;
     btnConfiguracao: TSpeedButton;
     btnRelatorio: TSpeedButton;
@@ -127,20 +126,22 @@ end;
 
 procedure TPrincipalBase.miSairClick(Sender: TObject);
 begin
-  Self.Close;
+  ModalResult := mrOK;
 end;
 
 procedure TPrincipalBase.MostrarDadosUsuario;
 var
   CaminhoImagem: string;
 begin
+  //Mostra o nome do usuário
   lblNomeCompleto.Caption := dtmPrincipalBase.fdqryDadosUsernome_completo.AsString;
 
-  CaminhoImagem := 'C:\Users\USER\Downloads\Folha de Ponto\Folha de Ponto\imagens\imagens-usuario\' +
+  //Carrega a imagem do usuário
+  CaminhoImagem := ExtractFilePath(ParamStr(0)) + '.\imagens\imagens-usuario\' +
                    IntToStr(UserId) + '.png';
 
   if not FileExists(CaminhoImagem) then
-    CaminhoImagem := 'C:\Users\USER\Downloads\Folha de Ponto\Folha de Ponto\imagens\imagens-usuario\1.png';
+    CaminhoImagem := ExtractFilePath(Application.ExeName) + 'user.png';
 
   ImgUsuario.Picture.LoadFromFile(CaminhoImagem);
 end;

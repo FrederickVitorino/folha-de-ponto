@@ -1,5 +1,5 @@
-Database=postgres
-User_Name=localhost
-Password=5432
+Database=ERB Technology
+User_Name=192.168.1.89
+Password=5433
 Server=postgres
-Port=123
+Port=Let@2016
