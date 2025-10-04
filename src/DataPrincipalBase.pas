@@ -21,7 +21,6 @@ type
     procedure ShowFrame<T: TFrame>;
     procedure HideAllFrames;
     procedure RestaurarApp();
-    { Public declarations }
   end;
 
 var

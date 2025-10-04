@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask,
   Vcl.ExtCtrls, DataTelaInicial, Vcl.ComCtrls, Vcl.TabNotBk,
-  Vcl.Imaging.pngimage, FormConfirmacao;
+  Vcl.Imaging.pngimage, FormConfirmacao, Vcl.CheckLst;
 
 type
   TTelaInicial = class(TForm)
@@ -17,7 +17,6 @@ type
     lbledtSenha: TLabeledEdit;
     lbledtLogin: TLabeledEdit;
     pnlConfig: TPanel;
-    btnSalvarConfigBD: TButton;
     lbledtPortaServerBD: TLabeledEdit;
     lbledtIPServerBD: TLabeledEdit;
     lbledtSenhaBD: TLabeledEdit;
@@ -25,6 +24,15 @@ type
     lbledtNomeBD: TLabeledEdit;
     ImgConfig: TImage;
     ImgVoltar: TImage;
+    grdpnl1: TGridPanel;
+    pnl1: TPanel;
+    grdpnl2: TGridPanel;
+    Button3: TButton;
+    btnSalvarConfigBD: TButton;
+    Label1: TLabel;
+    Panel2: TPanel;
+    RadioGroup: TRadioGroup;
+    Label2: TLabel;
     procedure btnEntrarClick(Sender: TObject);
     procedure btnSalvarConfigBDClick(Sender: TObject);
     procedure nb1Change(Sender: TObject; NewTab: Integer;
@@ -33,8 +41,12 @@ type
     procedure lbledtLoginKeyPress(Sender: TObject; var Key: Char);
     procedure ImgConfigClick(Sender: TObject);
     procedure ImgVoltarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure RadioGroupClick(Sender: TObject);
     private
-    procedure SalvaConfigBD;
+      procedure SalvaConfigBD;
+      procedure DefinirConfigBancoPorOpcao(Opcao: Integer);
     public
 
 
@@ -78,12 +90,65 @@ begin
 
     TelaConfirmacao.Lbl1.Caption := 'Deseja mesmo alterar as configurações?';
     TelaConfirmacao.pnlEdit.Visible := False;
+    TelaConfirmacao.grdpnl1.RowCollection[1].Value := 0;
+    TelaConfirmacao.grdpnl1.Realign;
+    TelaConfirmacao.ClientHeight := TelaConfirmacao.grdpnl1.Height;
     TelaConfirmacao.Caption := 'Confirmação das alterações';
     if TelaConfirmacao.ShowModal = mrOk then
+    begin
       SalvaConfigBD;
+      dtmTelaInicial.TestarConexaoBanco;
+    end;
   finally
     TelaConfirmacao.Free;
   end;
+end;
+
+
+procedure TTelaInicial.DefinirConfigBancoPorOpcao(Opcao: Integer);
+begin
+  case Opcao of
+    0://Homologação
+    begin
+      lbledtNomeBD.Text := 'postgres';
+      lbledtUserBD.Text := 'postgres';
+      lbledtSenhaBD.Text := '123';
+      lbledtPortaServerBD.Text := '5432';
+      lbledtIPServerBD.Text := 'localhost';
+    end;
+
+    1://Produção
+    begin
+      lbledtNomeBD.Text := 'postgres';
+      lbledtUserBD.Text := 'ERB Technology';
+      lbledtSenhaBD.Text := 'Let@2016';
+      lbledtPortaServerBD.Text := '5433';
+      lbledtIPServerBD.Text := '192.168.1.89';
+    end;
+    2://Outro
+    begin
+      lbledtNomeBD.Text := '';
+      lbledtUserBD.Text := '';
+      lbledtSenhaBD.Text := '';
+      lbledtPortaServerBD.Text := '';
+      lbledtIPServerBD.Text := '';
+    end;
+  end;
+end;
+
+procedure TTelaInicial.FormCreate(Sender: TObject);
+begin
+  ntbkTelaInicial.PageIndex := 0;
+end;
+
+procedure TTelaInicial.FormShow(Sender: TObject);
+begin
+  lbledtNomeBD.Text := dtmConexao.con.Params.Values['User_Name'];
+  lbledtUserBD.Text := dtmConexao.con.Params.Values['Database'];
+  lbledtSenhaBD.Text := dtmConexao.con.Params.Values['Password'];
+  lbledtIPServerBD.Text := dtmConexao.con.Params.Values['Server'];
+  lbledtPortaServerBD.Text := dtmConexao.con.Params.Values['Port'];
+
 end;
 
 procedure TTelaInicial.ImgVoltarClick(Sender: TObject);
@@ -156,6 +221,11 @@ begin
     lbledtUserBD.Text := SL.Values['Server'];
     lbledtSenhaBD.Text := SL.Values['Port'];
   end;
+end;
+
+procedure TTelaInicial.RadioGroupClick(Sender: TObject);
+begin
+  DefinirConfigBancoPorOpcao(RadioGroup.ItemIndex);
 end;
 
 end.

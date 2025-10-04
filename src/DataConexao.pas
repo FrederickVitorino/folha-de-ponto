@@ -59,7 +59,6 @@ begin
   FPorta := '';
   FUsername := '';
   FSenha := '';
-
   SL := TStringList.Create;
   try
     SL.LoadFromFile('.\Config\BDConfig.txt');

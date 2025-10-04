@@ -1,7 +1,7 @@
 object dtmConexao: TdtmConexao
   OnCreate = DataModuleCreate
-  Height = 480
-  Width = 640
+  Height = 229
+  Width = 455
   object con: TFDConnection
     Params.Strings = (
       'CharacterSet=UTF8'
@@ -10,8 +10,9 @@ object dtmConexao: TdtmConexao
       'Database=postgres'
       'User_Name=postgres'
       'Password=123')
+    Connected = True
     LoginPrompt = False
-    Left = 336
-    Top = 128
+    Left = 208
+    Top = 80
   end
 end
