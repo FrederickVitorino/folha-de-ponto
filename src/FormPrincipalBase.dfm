@@ -1,6 +1,6 @@
 object PrincipalBase: TPrincipalBase
-  Left = 218
-  Top = 89
+  Left = 403
+  Top = 213
   Margins.Left = 0
   Margins.Top = 0
   Margins.Right = 0
@@ -17,7 +17,7 @@ object PrincipalBase: TPrincipalBase
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Position = poDesigned
+  Position = poScreenCenter
   WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
@@ -136,21 +136,13 @@ object PrincipalBase: TPrincipalBase
       end
     end
   end
-  object pnlTela: TPanel
-    Left = 235
-    Top = 25
-    Width = 759
-    Height = 580
-    Align = alClient
-    TabOrder = 1
-  end
   object pnlBarra: TPanel
     Left = 0
     Top = 0
     Width = 994
     Height = 25
     Align = alTop
-    TabOrder = 2
+    TabOrder = 1
     object btnFechar: TSpeedButton
       Left = 960
       Top = 1
@@ -182,6 +174,14 @@ object PrincipalBase: TPrincipalBase
       OnClick = btnMinimizarClick
       ExplicitLeft = 960
     end
+  end
+  object pnlTela: TPanel
+    Left = 235
+    Top = 25
+    Width = 759
+    Height = 580
+    Align = alClient
+    TabOrder = 2
   end
   object TrayIcon: TTrayIcon
     Hint = 'Sistema de Folha de Ponto'
