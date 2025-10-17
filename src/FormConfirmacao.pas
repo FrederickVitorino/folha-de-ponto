@@ -9,6 +9,7 @@ uses
 
 type
   TConfirmacao = class(TForm)
+    grdpnl1: TGridPanel;
     pnlLabel: TPanel;
     Lbl1: TLabel;
     pnlEdit: TPanel;
@@ -20,6 +21,7 @@ type
     procedure Btn2Click(Sender: TObject);
     procedure Edt1KeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   private
     FEditText: String;
     function SetEditText: String;
@@ -56,9 +58,13 @@ end;
 
 procedure TConfirmacao.FormCreate(Sender: TObject);
 begin
-  Lbl1.Width := 300;
+  Lbl1.Width := 350;
 end;
 
+procedure TConfirmacao.FormResize(Sender: TObject);
+begin
+  ClientHeight := grdpnl1.Height;
+end;
 
 function TConfirmacao.SetEditText: String;
 begin

@@ -16,6 +16,7 @@ type
   public
     function ValidaLogin(Login, Senha: string): Integer;
     procedure FazerLogin(Login: string; Senha: string);
+    procedure TestarConexaoBanco();
   end;
 
 var
@@ -54,11 +55,21 @@ begin
 
   try
     PrincipalBase.UserId := user_id;
-    TelaInicial.Hide;
     PrincipalBase.ShowModal;
   finally
-    TelaInicial.Show;
     FreeAndNil(PrincipalBase);
+  end;
+end;
+
+procedure TdtmTelaInicial.TestarConexaoBanco;
+begin
+  try
+    dtmConexao.con.Connected := False;
+    dtmConexao.con.Connected := True;
+    ShowMessage('Conexão realizada com sucesso!');
+  except
+    on E: Exception do
+      ShowMessage('Erro na conexão: ' + sLineBreak + E.Message);
   end;
 end;
 

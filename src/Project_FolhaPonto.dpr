@@ -20,6 +20,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   //
+  TStyleManager.TrySetStyle('Amethyst Kamri');
   Application.Title := 'Folha de ponto';
   Application.CreateForm(TTelaInicial, TelaInicial);
   Application.CreateForm(TdtmConexao, dtmConexao);
