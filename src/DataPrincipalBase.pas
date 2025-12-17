@@ -20,7 +20,6 @@ type
   public
     procedure ShowFrame<T: TFrame>;
     procedure HideAllFrames;
-    procedure RestaurarApp();
   end;
 
 var
@@ -69,17 +68,6 @@ begin
       if pnlTela.Controls[i] is TFrame then
         pnlTela.Controls[i].Visible := False;
     end;
-  end;
-end;
-
-procedure TdtmPrincipalBase.RestaurarApp;
-begin
-  with PrincipalBase do
-  begin
-    Show;
-    WindowState := wsMaximized;
-    BringToFront;
-    SetForegroundWindow(Handle);
   end;
 end;
 

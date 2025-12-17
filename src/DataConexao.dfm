@@ -4,13 +4,7 @@ object dtmConexao: TdtmConexao
   Width = 455
   object con: TFDConnection
     Params.Strings = (
-      'CharacterSet=UTF8'
-      'Server=localhost'
-      'DriverID=PG'
-      'Database=postgres'
-      'User_Name=postgres'
-      'Password=123')
-    Connected = True
+      'DriverID=PG')
     LoginPrompt = False
     Left = 208
     Top = 80

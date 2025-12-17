@@ -30,23 +30,18 @@ type
     Button3: TButton;
     btnSalvarConfigBD: TButton;
     Label1: TLabel;
-    Panel2: TPanel;
-    RadioGroup: TRadioGroup;
     Label2: TLabel;
     procedure btnEntrarClick(Sender: TObject);
     procedure btnSalvarConfigBDClick(Sender: TObject);
-    procedure nb1Change(Sender: TObject; NewTab: Integer;
-      var AllowChange: Boolean);
     procedure lbledtSenhaKeyPress(Sender: TObject; var Key: Char);
     procedure lbledtLoginKeyPress(Sender: TObject; var Key: Char);
     procedure ImgConfigClick(Sender: TObject);
     procedure ImgVoltarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure RadioGroupClick(Sender: TObject);
+    procedure ntbkTelaInicialPageChanged(Sender: TObject);
     private
       procedure SalvaConfigBD;
-      procedure DefinirConfigBancoPorOpcao(Opcao: Integer);
     public
 
 
@@ -68,10 +63,10 @@ begin
   Login := lbledtLogin.Text;
   Senha := lbledtSenha.Text;
   try
-    //if (Login <> '') and (Senha <> '') then
+    if (Login <> '') and (Senha <> '') then
       dtmTelaInicial.FazerLogin(Login, Senha)
-    //else
-    //ShowMessage('Preencha todos os campos.');
+    else
+      ShowMessage('Preencha todos os campos.');
   finally
     lbledtLogin.Clear;
     lbledtSenha.Clear;
@@ -104,38 +99,6 @@ begin
   end;
 end;
 
-
-procedure TTelaInicial.DefinirConfigBancoPorOpcao(Opcao: Integer);
-begin
-  case Opcao of
-    0://Homologação
-    begin
-      lbledtNomeBD.Text := 'postgres';
-      lbledtUserBD.Text := 'postgres';
-      lbledtSenhaBD.Text := '123';
-      lbledtPortaServerBD.Text := '5432';
-      lbledtIPServerBD.Text := 'localhost';
-    end;
-
-    1://Produção
-    begin
-      lbledtNomeBD.Text := 'postgres';
-      lbledtUserBD.Text := 'ERB Technology';
-      lbledtSenhaBD.Text := 'Let@2016';
-      lbledtPortaServerBD.Text := '5433';
-      lbledtIPServerBD.Text := '192.168.1.89';
-    end;
-    2://Outro
-    begin
-      lbledtNomeBD.Text := '';
-      lbledtUserBD.Text := '';
-      lbledtSenhaBD.Text := '';
-      lbledtPortaServerBD.Text := '';
-      lbledtIPServerBD.Text := '';
-    end;
-  end;
-end;
-
 procedure TTelaInicial.FormCreate(Sender: TObject);
 begin
   ntbkTelaInicial.PageIndex := 0;
@@ -143,12 +106,11 @@ end;
 
 procedure TTelaInicial.FormShow(Sender: TObject);
 begin
-  lbledtNomeBD.Text := dtmConexao.con.Params.Values['User_Name'];
-  lbledtUserBD.Text := dtmConexao.con.Params.Values['Database'];
+  lbledtNomeBD.Text := dtmConexao.con.Params.Values['Database'];
+  lbledtUserBD.Text := dtmConexao.con.Params.Values['User_Name'];
   lbledtSenhaBD.Text := dtmConexao.con.Params.Values['Password'];
   lbledtIPServerBD.Text := dtmConexao.con.Params.Values['Server'];
   lbledtPortaServerBD.Text := dtmConexao.con.Params.Values['Port'];
-
 end;
 
 procedure TTelaInicial.ImgVoltarClick(Sender: TObject);
@@ -171,7 +133,6 @@ begin
   Senha := lbledtSenhaBD.Text;
   dtmConexao.AtualizarArqConfigBD(NomeBD, IP, Porta, Username, Senha);
   dtmConexao.AlterarConfigBD(NomeBD, IP, Porta, Username, Senha);
-
 end;
 
 procedure TTelaInicial.ImgConfigClick(Sender: TObject);
@@ -183,9 +144,19 @@ begin
     LConfirmacao.Lbl1.Caption := 'Digite a senha para alterar o banco de dados.';
     LConfirmacao.pnlEdit.Visible := True;
 
+
     if LConfirmacao.ShowModal = mrOk then
-      if LConfirmacao.Edt1.Text = '123' then
+    begin
+      if LConfirmacao.Edt1.Text = dtmConexao.Senha then
+      begin
         ntbkTelaInicial.PageIndex := 1;
+      end
+      else
+      begin
+        ShowMessage('A senha informada está incorreta.');
+      end;
+    end;
+
   finally
     LConfirmacao.Free;
   end;
@@ -206,26 +177,21 @@ begin
   end;
 end;
 
-procedure TTelaInicial.nb1Change(Sender: TObject; NewTab: Integer; var AllowChange: Boolean);
+procedure TTelaInicial.ntbkTelaInicialPageChanged(Sender: TObject);
 var
   SL: TStringList;
 begin
-  if NewTab = 1 then
+  if ntbkTelaInicial.PageIndex = 1 then
   begin
     SL := TStringList.Create;
     SL.LoadFromFile('.\Config\BDConfig.txt');
 
     lbledtNomeBD.Text := SL.Values['Database'];
-    lbledtIPServerBD.Text := SL.Values['User_Name'];
-    lbledtPortaServerBD.Text := SL.Values['Password'];
-    lbledtUserBD.Text := SL.Values['Server'];
-    lbledtSenhaBD.Text := SL.Values['Port'];
+    lbledtIPServerBD.Text := SL.Values['Server'];
+    lbledtPortaServerBD.Text := SL.Values['Port'];
+    lbledtUserBD.Text := SL.Values['User_Name'];
+    lbledtSenhaBD.Text := SL.Values['Password'];
   end;
-end;
-
-procedure TTelaInicial.RadioGroupClick(Sender: TObject);
-begin
-  DefinirConfigBancoPorOpcao(RadioGroup.ItemIndex);
 end;
 
 end.

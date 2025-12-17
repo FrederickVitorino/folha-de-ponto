@@ -64,10 +64,10 @@ begin
     SL.LoadFromFile('.\Config\BDConfig.txt');
 
     FNomeBD := SL.Values['Database'];
-    FIP := SL.Values['User_Name'];
-    FPorta := SL.Values['Password'];
-    FUsername := SL.Values['Server'];
-    FSenha := SL.Values['Port'];
+    FIP := SL.Values['Server'];
+    FPorta := SL.Values['Port'];
+    FUsername := SL.Values['User_Name'];
+    FSenha := SL.Values['Password'];
 
     AlterarConfigBD(FNomeBD, FIP, FPorta, FUsername, FSenha);
   except
@@ -122,10 +122,10 @@ begin
   Rewrite(Arquivo);
 
   Linha := 'Database=' + NomeBD + sLineBreak +
-           'User_Name=' + IP + sLineBreak +
-           'Password=' + Porta + sLineBreak +
-           'Server=' + Username + sLineBreak +
-           'Port=' + Senha;
+           'User_Name=' + Username + sLineBreak +
+           'Password=' + Senha + sLineBreak +
+           'Server=' + IP + sLineBreak +
+           'Port=' + Porta;
 
   Writeln(Arquivo, Linha);
   CloseFile(Arquivo);

@@ -14,10 +14,8 @@ type
     Lbl1: TLabel;
     pnlEdit: TPanel;
     Edt1: TEdit;
-    pnlBotoes: TPanel;
     Btn1: TPanel;
     Btn2: TPanel;
-    grdpnl1: TGridPanel;
     procedure Btn1Click(Sender: TObject);
     procedure Btn2Click(Sender: TObject);
     procedure Edt1KeyPress(Sender: TObject; var Key: Char);

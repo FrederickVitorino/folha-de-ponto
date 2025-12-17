@@ -186,7 +186,6 @@ object PrincipalBase: TPrincipalBase
   object TrayIcon: TTrayIcon
     Hint = 'Sistema de Folha de Ponto'
     PopupMenu = PopupMenu
-    OnDblClick = TrayIconDblClick
     Left = 33
     Top = 17
   end
@@ -195,11 +194,9 @@ object PrincipalBase: TPrincipalBase
     Top = 81
     object miRestaurar: TMenuItem
       Caption = 'Restaurar'
-      OnClick = miRestaurarClick
     end
     object miSair: TMenuItem
       Caption = 'Sair'
-      OnClick = miSairClick
     end
   end
 end

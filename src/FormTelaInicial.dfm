@@ -28,24 +28,18 @@ object TelaInicial: TTelaInicial
     Height = 410
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 508
-    ExplicitHeight = 402
     object ntbkTelaInicial: TNotebook
       Left = 1
       Top = 1
       Width = 508
       Height = 408
       Align = alClient
-      PageIndex = 1
       TabOrder = 0
-      ExplicitWidth = 506
-      ExplicitHeight = 400
+      OnPageChanged = ntbkTelaInicialPageChanged
       object TPage
         Left = 0
         Top = 0
         Caption = 'Login'
-        ExplicitWidth = 506
-        ExplicitHeight = 400
         object pnlLogin: TPanel
           Left = 0
           Top = 0
@@ -100,8 +94,6 @@ object TelaInicial: TTelaInicial
               end>
             ShowCaption = False
             TabOrder = 0
-            ExplicitLeft = -32
-            ExplicitTop = -88
             object ImgConfig: TImage
               Left = 476
               Top = 0
@@ -769,27 +761,27 @@ object TelaInicial: TTelaInicial
               item
                 Column = 1
                 Control = lbledtNomeBD
-                Row = 3
-              end
-              item
-                Column = 1
-                Control = lbledtUserBD
                 Row = 2
               end
               item
                 Column = 1
+                Control = lbledtUserBD
+                Row = 1
+              end
+              item
+                Column = 1
                 Control = lbledtSenhaBD
-                Row = 4
+                Row = 3
               end
               item
                 Column = 1
                 Control = lbledtIPServerBD
-                Row = 5
+                Row = 4
               end
               item
                 Column = 1
                 Control = lbledtPortaServerBD
-                Row = 6
+                Row = 5
               end
               item
                 Column = 0
@@ -804,58 +796,46 @@ object TelaInicial: TTelaInicial
               item
                 Column = 1
                 Control = btnSalvarConfigBD
-                Row = 8
+                Row = 6
               end
               item
                 Column = 1
                 Control = Label1
                 Row = 0
-              end
-              item
-                Column = 1
-                Control = Panel2
-                Row = 1
               end>
             RowCollection = <
               item
-                Value = 9.212491329447662000
+                Value = 9.812422216364013000
               end
               item
-                Value = 17.000000000000000000
+                Value = 18.107064822408840000
               end
               item
-                Value = 12.929262754995780000
+                Value = 13.771235224156760000
               end
               item
-                Value = 12.937539239374900000
+                Value = 13.780050685283480000
               end
               item
-                Value = 12.638540247497550000
+                Value = 13.461580442474190000
               end
               item
-                Value = 12.389222982141170000
+                Value = 13.196027272759270000
               end
               item
-                Value = 12.389222982141170000
-              end
-              item
-                Value = 1.087655325990642000
-              end
-              item
-                Value = 9.416065138411144000
+                Value = 17.871619336553450000
               end>
             ShowCaption = False
             TabOrder = 0
-            ExplicitHeight = 401
             DesignSize = (
               508
               408)
             object lbledtNomeBD: TLabeledEdit
               AlignWithMargins = True
               Left = 61
-              Top = 186
+              Top = 142
               Width = 386
-              Height = 26
+              Height = 28
               Margins.Left = 10
               Margins.Top = 0
               Margins.Right = 10
@@ -878,14 +858,14 @@ object TelaInicial: TTelaInicial
               ParentFont = False
               TabOrder = 0
               Text = ''
-              ExplicitTop = 197
+              ExplicitTop = 184
             end
             object lbledtUserBD: TLabeledEdit
               AlignWithMargins = True
               Left = 61
-              Top = 134
+              Top = 86
               Width = 386
-              Height = 26
+              Height = 28
               Margins.Left = 10
               Margins.Top = 0
               Margins.Right = 10
@@ -908,14 +888,14 @@ object TelaInicial: TTelaInicial
               ParentFont = False
               TabOrder = 1
               Text = ''
-              ExplicitTop = 148
+              ExplicitTop = 132
             end
             object lbledtSenhaBD: TLabeledEdit
               AlignWithMargins = True
               Left = 61
-              Top = 238
+              Top = 198
               Width = 386
-              Height = 26
+              Height = 28
               Margins.Left = 10
               Margins.Top = 0
               Margins.Right = 10
@@ -938,12 +918,12 @@ object TelaInicial: TTelaInicial
               ParentFont = False
               TabOrder = 2
               Text = ''
-              ExplicitTop = 245
+              ExplicitTop = 236
             end
             object lbledtIPServerBD: TLabeledEdit
               AlignWithMargins = True
               Left = 61
-              Top = 289
+              Top = 255
               Width = 386
               Height = 26
               Margins.Left = 10
@@ -969,14 +949,14 @@ object TelaInicial: TTelaInicial
               ParentFont = False
               TabOrder = 3
               Text = ''
-              ExplicitTop = 292
+              ExplicitTop = 289
             end
             object lbledtPortaServerBD: TLabeledEdit
               AlignWithMargins = True
               Left = 61
-              Top = 339
+              Top = 307
               Width = 386
-              Height = 26
+              Height = 28
               Margins.Left = 10
               Margins.Top = 0
               Margins.Right = 10
@@ -999,12 +979,13 @@ object TelaInicial: TTelaInicial
               ParentFont = False
               TabOrder = 4
               Text = ''
+              ExplicitTop = 334
             end
             object ImgVoltar: TImage
               Left = 0
               Top = 0
               Width = 33
-              Height = 38
+              Height = 40
               Align = alLeft
               Picture.Data = {
                 0954506E67496D61676589504E470D0A1A0A0000000D49484452000002000000
@@ -1585,9 +1566,9 @@ object TelaInicial: TTelaInicial
             object Button3: TButton
               AlignWithMargins = True
               Left = 537
-              Top = 48
+              Top = 50
               Width = 0
-              Height = 49
+              Height = 54
               Margins.Left = 80
               Margins.Top = 10
               Margins.Right = 80
@@ -1602,13 +1583,12 @@ object TelaInicial: TTelaInicial
               ParentFont = False
               TabOrder = 5
               OnClick = btnSalvarConfigBDClick
-              ExplicitLeft = 508
-              ExplicitTop = 44
-              ExplicitHeight = 15
+              ExplicitTop = 48
+              ExplicitHeight = 49
             end
             object btnSalvarConfigBD: TButton
               Left = 54
-              Top = 372
+              Top = 354
               Width = 400
               Height = 34
               Margins.Left = 80
@@ -1628,7 +1608,7 @@ object TelaInicial: TTelaInicial
             end
             object Label1: TLabel
               Left = 98
-              Top = 6
+              Top = 7
               Width = 311
               Height = 25
               Anchors = []
@@ -1641,38 +1621,6 @@ object TelaInicial: TTelaInicial
               ParentFont = False
               ExplicitLeft = 106
               ExplicitTop = 4
-            end
-            object Panel2: TPanel
-              AlignWithMargins = True
-              Left = 54
-              Top = 41
-              Width = 400
-              Height = 63
-              Align = alClient
-              BevelOuter = bvNone
-              TabOrder = 7
-              ExplicitLeft = 98
-              ExplicitTop = 91
-              ExplicitWidth = 185
-              ExplicitHeight = 41
-              object RadioGroup: TRadioGroup
-                AlignWithMargins = True
-                Left = 3
-                Top = 3
-                Width = 394
-                Height = 57
-                Align = alClient
-                Caption = 'Seleciona o banco de dados:'
-                Columns = 3
-                Items.Strings = (
-                  'Homologa'#231#227'o'
-                  'Produ'#231#227'o'
-                  'Outro')
-                TabOrder = 0
-                OnClick = RadioGroupClick
-                ExplicitLeft = 6
-                ExplicitTop = -4
-              end
             end
           end
         end

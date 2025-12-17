@@ -33,11 +33,8 @@ type
     procedure btnConfiguracaoClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure btnRelatorioClick(Sender: TObject);
-    procedure miRestaurarClick(Sender: TObject);
-    procedure miSairClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
-    procedure TrayIconDblClick(Sender: TObject);
     procedure btnMinimizarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -76,11 +73,6 @@ begin
   FUserId := Value;
 end;
 
-procedure TPrincipalBase.TrayIconDblClick(Sender: TObject);
-begin
-  dtmPrincipalBase.RestaurarApp;
-end;
-
 procedure TPrincipalBase.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -90,8 +82,6 @@ end;
 procedure TPrincipalBase.FormCreate(Sender: TObject);
 begin
   SetBounds(0, 0, Screen.Width, Screen.Height);
-  TrayIcon.Icon := Application.Icon;
-  TrayIcon.Visible := True;
 end;
 
 procedure TPrincipalBase.FormResize(Sender: TObject);
@@ -99,7 +89,6 @@ begin
   if Self.WindowState = wsMinimized then
   begin
     Hide;
-    TrayIcon.Visible := True;
   end;
 end;
 
@@ -112,22 +101,7 @@ begin
     Open;
   end;
 
-  TrayIcon.BalloonTitle := 'Sistema Folha de Ponto';
-  TrayIcon.BalloonHint := 'O sistema está sendo executado na área de notificação';
-  TrayIcon.ShowBalloonHint;
-
   MostrarDadosUsuario;
-end;
-
-procedure TPrincipalBase.miRestaurarClick(Sender: TObject);
-begin
-  dtmPrincipalBase.RestaurarApp;
-  SetForegroundWindow(Handle);
-end;
-
-procedure TPrincipalBase.miSairClick(Sender: TObject);
-begin
-  ModalResult := mrOK;
 end;
 
 procedure TPrincipalBase.MostrarDadosUsuario;

@@ -38,74 +38,93 @@ object Confirmacao: TConfirmacao
       Caption = 'grdpnl1'
       ColumnCollection = <
         item
-          Value = 7.018710097553784000
+          Value = 7.000000000000000000
         end
         item
-          Value = 85.945093732412260000
+          Value = 42.819078411686450000
         end
         item
-          Value = 7.036196170033955000
+          Value = 42.992825047216020000
+        end
+        item
+          Value = 7.188096541097536000
         end>
       ControlCollection = <
         item
           Column = 1
+          ColumnSpan = 2
           Control = pnlLabel
           Row = 0
         end
         item
           Column = 1
+          ColumnSpan = 2
           Control = pnlEdit
           Row = 1
         end
         item
           Column = 1
-          Control = pnlBotoes
+          Control = Btn1
+          Row = 2
+        end
+        item
+          Column = 2
+          Control = Btn2
           Row = 2
         end>
       RowCollection = <
         item
-          Value = 25.000000000000000000
+          Value = 35.000000000000000000
         end
         item
-          Value = 25.000000000000000000
+          Value = 30.000000000000000000
         end
         item
-          Value = 49.999999999999990000
+          Value = 35.000000000000000000
         end>
       ShowCaption = False
       TabOrder = 0
       object pnlLabel: TPanel
-        AlignWithMargins = True
-        Left = 30
-        Top = 3
-        Width = 325
-        Height = 26
+        Left = 27
+        Top = 0
+        Width = 330
+        Height = 45
         Align = alClient
         AutoSize = True
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
         TabOrder = 0
-        ExplicitLeft = 3
-        ExplicitWidth = 379
-        ExplicitHeight = 15
+        ExplicitLeft = 30
+        ExplicitTop = 3
+        ExplicitWidth = 325
+        ExplicitHeight = 26
         object Lbl1: TLabel
           Left = 0
-          Top = 11
-          Width = 325
-          Height = 15
-          Align = alBottom
+          Top = 0
+          Width = 330
+          Height = 45
+          Align = alClient
+          AutoSize = False
           Caption = 'Texto do label'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -17
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlBottom
           WordWrap = True
-          ExplicitWidth = 73
+          ExplicitTop = 11
+          ExplicitWidth = 129
+          ExplicitHeight = 30
         end
       end
       object pnlEdit: TPanel
-        AlignWithMargins = True
-        Left = 30
-        Top = 35
-        Width = 325
-        Height = 26
+        Left = 27
+        Top = 45
+        Width = 330
+        Height = 39
         Align = alClient
         AutoSize = True
         BevelOuter = bvNone
@@ -113,127 +132,92 @@ object Confirmacao: TConfirmacao
         ParentBackground = False
         TabOrder = 1
         Visible = False
-        ExplicitLeft = 0
-        ExplicitTop = 32
-        ExplicitWidth = 385
-        ExplicitHeight = 23
+        ExplicitLeft = 30
+        ExplicitTop = 35
+        ExplicitWidth = 325
+        ExplicitHeight = 26
         object Edt1: TEdit
+          AlignWithMargins = True
           Left = 0
-          Top = 0
-          Width = 325
-          Height = 26
+          Top = 5
+          Width = 330
+          Height = 34
+          Margins.Left = 0
+          Margins.Top = 5
+          Margins.Right = 0
+          Margins.Bottom = 0
           Align = alClient
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -17
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
           PasswordChar = '*'
           TabOrder = 0
           TextHint = 'Digite seu texto'
           OnKeyPress = Edt1KeyPress
-          ExplicitTop = 6
-          ExplicitWidth = 331
-          ExplicitHeight = 23
+          ExplicitTop = 0
+          ExplicitWidth = 324
+          ExplicitHeight = 31
         end
       end
-      object pnlBotoes: TPanel
+      object Btn1: TPanel
         AlignWithMargins = True
-        Left = 30
-        Top = 67
-        Width = 325
-        Height = 41
-        Align = alTop
-        Anchors = []
-        AutoSize = True
-        BevelOuter = bvNone
-        Color = clWhite
+        Left = 27
+        Top = 89
+        Width = 160
+        Height = 35
+        Cursor = crHandPoint
+        Margins.Left = 0
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
+        Align = alClient
+        Caption = 'Sim'
+        Color = clGreen
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
         ParentBackground = False
+        ParentFont = False
         TabOrder = 2
-        object Btn1: TPanel
-          Left = 0
-          Top = 0
-          Width = 153
-          Height = 41
-          Cursor = crHandPoint
-          Caption = 'Sim'
-          Color = clGreen
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Segoe UI'
-          Font.Style = []
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 0
-          StyleElements = [seBorder]
-          OnClick = Btn1Click
-        end
-        object Btn2: TPanel
-          Left = 175
-          Top = 0
-          Width = 153
-          Height = 41
-          Cursor = crHandPoint
-          Caption = 'N'#227'o'
-          Color = clRed
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Segoe UI'
-          Font.Style = []
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 1
-          StyleElements = [seBorder]
-          OnClick = Btn2Click
-        end
-      end
-      object pnlBotoes: TPanel
-        Left = 0
-        Top = 50
-        Width = 385
-        Height = 61
-        Align = alTop
-        Anchors = []
-        BevelOuter = bvNone
-        Color = clWhite
-        ParentBackground = False
-        TabOrder = 2
+        StyleElements = [seBorder]
+        OnClick = Btn1Click
+        ExplicitLeft = 0
         ExplicitTop = 0
-        object Btn1: TPanel
-          Left = 24
-          Top = 6
-          Width = 153
-          Height = 41
-          Cursor = crHandPoint
-          Caption = 'Sim'
-          Color = clGreen
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Segoe UI'
-          Font.Style = []
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 0
-          StyleElements = [seBorder]
-          OnClick = Btn1Click
-        end
-        object Btn2: TPanel
-          Left = 199
-          Top = 6
-          Width = 153
-          Height = 41
-          Cursor = crHandPoint
-          Caption = 'N'#227'o'
-          Color = clRed
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Segoe UI'
-          Font.Style = []
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 1
-          StyleElements = [seBorder]
-          OnClick = Btn2Click
-        end
+        ExplicitWidth = 120
+      end
+      object Btn2: TPanel
+        AlignWithMargins = True
+        Left = 197
+        Top = 89
+        Width = 160
+        Height = 35
+        Cursor = crHandPoint
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 0
+        Margins.Bottom = 5
+        Align = alClient
+        Caption = 'N'#227'o'
+        Color = clRed
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 3
+        StyleElements = [seBorder]
+        OnClick = Btn2Click
+        ExplicitLeft = 265
+        ExplicitTop = 4
+        ExplicitWidth = 120
+        ExplicitHeight = 33
       end
     end
   end
