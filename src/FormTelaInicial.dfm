@@ -28,6 +28,8 @@ object TelaInicial: TTelaInicial
     Height = 410
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 508
+    ExplicitHeight = 402
     object ntbkTelaInicial: TNotebook
       Left = 1
       Top = 1
@@ -36,10 +38,14 @@ object TelaInicial: TTelaInicial
       Align = alClient
       PageIndex = 1
       TabOrder = 0
+      ExplicitWidth = 506
+      ExplicitHeight = 400
       object TPage
         Left = 0
         Top = 0
         Caption = 'Login'
+        ExplicitWidth = 506
+        ExplicitHeight = 400
         object pnlLogin: TPanel
           Left = 0
           Top = 0

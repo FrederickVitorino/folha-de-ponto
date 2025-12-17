@@ -184,6 +184,57 @@ object Confirmacao: TConfirmacao
           OnClick = Btn2Click
         end
       end
+      object pnlBotoes: TPanel
+        Left = 0
+        Top = 50
+        Width = 385
+        Height = 61
+        Align = alTop
+        Anchors = []
+        BevelOuter = bvNone
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 2
+        ExplicitTop = 0
+        object Btn1: TPanel
+          Left = 24
+          Top = 6
+          Width = 153
+          Height = 41
+          Cursor = crHandPoint
+          Caption = 'Sim'
+          Color = clGreen
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 0
+          StyleElements = [seBorder]
+          OnClick = Btn1Click
+        end
+        object Btn2: TPanel
+          Left = 199
+          Top = 6
+          Width = 153
+          Height = 41
+          Cursor = crHandPoint
+          Caption = 'N'#227'o'
+          Color = clRed
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 1
+          StyleElements = [seBorder]
+          OnClick = Btn2Click
+        end
+      end
     end
   end
 end
